@@ -57,13 +57,13 @@ namespace TeodorDesktopApp
             addToCartButton = driver.FindElement(By.Id("product-addtocart-button"));
             addToCartButton.Click();
 
-            Thread.Sleep(3000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
             showCartButton = driver.FindElement(By.CssSelector(".showcart"));
             Actions actions = new Actions(driver);
             actions.MoveToElement(showCartButton).Perform();
 
-            addedItem = driver.FindElement(By.XPath("//li/div/div/strong/a"));
+            addedItem = driver.FindElement(By.CssSelector("#mini-cart > li > div > div > strong"));
 
             //Assert
             Assert.AreEqual(expectedResult, addedItem.Text);
